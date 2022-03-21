@@ -125,11 +125,13 @@ namespace MultiValueDictionary
 
             _dictionary.TryGetValue(key1, out var values1);
             _dictionary.TryGetValue(key2, out var values2);
+            HashSet<string> tempValues;
 
             if (values1 != null && values2 != null)
             {
-                values1.UnionWith(values2);
-                return values1;
+                tempValues = new HashSet<string>(values1);
+                tempValues.UnionWith(values2);
+                return tempValues;
             }
 
             return new HashSet<string>();
@@ -143,11 +145,13 @@ namespace MultiValueDictionary
 
             _dictionary.TryGetValue(key1, out var values1);
             _dictionary.TryGetValue(key2, out var values2);
+            HashSet<string> tempValues;
 
             if (values1 != null && values2 != null)
-            {
-                values1.IntersectWith(values2);
-                return values1;
+            {   
+                tempValues = new HashSet<string>(values1);
+                tempValues.IntersectWith(values2);
+                return tempValues;
             }
 
             return new HashSet<string>();

@@ -10,7 +10,7 @@ namespace MultiValueDictionary
             GetCommandLineInput();
         }
 
-        // This method takes input from the command line and executes relative multi value dictionary operation
+        //This method takes input from the command line and executes relative multi value dictionary operation
         private static void GetCommandLineInput()
         {
             MultiValueDictionary multiDictionary = new();
@@ -270,8 +270,8 @@ namespace MultiValueDictionary
                                 }
                                 else
                                 {
-                                    var unionItems = multiDictionary.Intersect(input[key], input[value]);
-                                    foreach (var item in unionItems)
+                                    var intersectItems = multiDictionary.Intersect(input[key], input[value]);
+                                    foreach (var item in intersectItems)
                                         Console.WriteLine(item);
                                 }
                             }
