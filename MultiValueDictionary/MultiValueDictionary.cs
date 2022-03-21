@@ -125,6 +125,7 @@ namespace MultiValueDictionary
 
             _dictionary.TryGetValue(key1, out var values1);
             _dictionary.TryGetValue(key2, out var values2);
+
             HashSet<string> tempValues;
 
             if (values1 != null && values2 != null)
@@ -155,6 +156,26 @@ namespace MultiValueDictionary
             }
 
             return new HashSet<string>();
+        }
+
+        public List<string> AllIntersect()
+        {
+            var keys = _dictionary.Keys;
+
+            List<string> allKeyValues = new();
+
+            foreach(var key in keys)
+            {
+                _dictionary.TryGetValue(key, out var values);
+
+                allKeyValues.AddRange(values);
+            }
+            var dups = allKeyValues.GroupBy(x => x)
+                .Where(x => x.Count() > 1)
+                .Select(x => x.Key)
+                .ToList();
+
+            return dups;
         }
     }
 }

@@ -16,5 +16,6 @@ namespace MultiValueDictionary
         List<KeyValuePair<string, string>> GetItems();
         HashSet<string> Union(string key1, string key2);
         HashSet<string> Intersect(string key1, string key2);
+        List<string> AllIntersect();
     }
 }

@@ -277,6 +277,20 @@ namespace MultiValueDictionary
                             }
                             break;
 
+                        case "ALLINTERSECT":
+                            {
+                                if(input.Length !=1)
+                                {
+                                    Console.WriteLine(enterValidInput);
+                                }
+                                else
+                                {
+                                    var allIntersect = multiDictionary.AllIntersect();
+                                    foreach(var item in allIntersect)
+                                        Console.WriteLine(item);
+                                }
+                            }
+                            break;
                         default:
                             Console.WriteLine(enterValidInput);
                             break;
