@@ -8,8 +8,6 @@ namespace UnitTests
     [TestFixture]
     public class Tests
     {
-        Dictionary<string, HashSet<string>> _dictionary = new Dictionary<string, HashSet<string>>();
-
         [TestCase("FirstKey", "FirstValue")]
         [TestCase("SecondKey", "SecondValue")]
         public void AddKeyValueGoodOperationTest(string key, string val)
@@ -143,14 +141,19 @@ namespace UnitTests
         [Test]
         public void GetItemsTest()
         {
-            Dictionary<string, HashSet<string>> items = new();
-
-            items.Add("key1", new HashSet<string> { "value1", "value2" });
-            items.Add("key2", new HashSet<string> { "value1" });
+            List<KeyValuePair<string, string>> expectedOutput = new();
+            expectedOutput.Add(new KeyValuePair<string, string>("key1", "value1"));
+            expectedOutput.Add(new KeyValuePair<string, string>("key1", "value2"));
+            expectedOutput.Add(new KeyValuePair<string, string>("key2", "value1"));
 
             var getItems = new MultiValueDictionary.MultiValueDictionary();
 
-            var response = getItems.GetItems();
+            getItems.Add("key1", "value1");
+            getItems.Add("key1", "value2");
+            getItems.Add("key2", "value1");
+
+            var actualOutput = getItems.GetItems();
+            Assert.AreEqual(expectedOutput, actualOutput);
         }
 
         [Test]

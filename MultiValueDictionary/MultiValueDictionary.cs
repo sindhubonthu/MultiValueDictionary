@@ -105,17 +105,24 @@ namespace MultiValueDictionary
         // Returns all keys and corresponding members
         public List<KeyValuePair<string, string>> GetItems()
         {
-            return _dictionary.SelectMany(item => item.Value,
-                (item, value) => new KeyValuePair<string, string>(item.Key, value)).ToList();
-            /*foreach(var key in _dictionary.Keys)
+            List<KeyValuePair<string, string>> items = new();
+
+            foreach (var key in _dictionary.Keys)
             {
                 _dictionary.TryGetValue(key, out var values);
-            }*/
+
+                foreach(var item in values)
+                    items.Add(new KeyValuePair<string, string>(key, item));
+            }
+            return items;
         }
 
         // Returns members that exist in either first or second value list.
         public HashSet<string> Union(string key1, string key2)
         {
+            ArgumentNullException.ThrowIfNull(key1);
+            ArgumentNullException.ThrowIfNull(key2);
+
             _dictionary.TryGetValue(key1, out var values1);
             _dictionary.TryGetValue(key2, out var values2);
 
@@ -131,6 +138,9 @@ namespace MultiValueDictionary
         //Returns members that are common in both key values.
         public HashSet<string> Intersect(string key1, string key2)
         {
+            ArgumentNullException.ThrowIfNull(key1);
+            ArgumentNullException.ThrowIfNull(key2);
+
             _dictionary.TryGetValue(key1, out var values1);
             _dictionary.TryGetValue(key2, out var values2);
 
